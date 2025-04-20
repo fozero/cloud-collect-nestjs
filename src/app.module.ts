@@ -8,6 +8,10 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TagModule } from './tag/tag.module';
 import { CategoryModule } from './category/category.module';
+import { PostModule } from './post/post.module';
+import { CollectionModule } from './collection/collection.module';
+import { FavoriteModule } from './favorite/favorite.module';
+import { FavoriteFolderModule } from './favorite-folder/favorite-folder.module';
 
 @Module({
   imports: [
@@ -42,6 +46,10 @@ import { CategoryModule } from './category/category.module';
     AuthModule,
     TagModule,
     CategoryModule,
+    PostModule,
+    CollectionModule,
+    FavoriteModule,
+    FavoriteFolderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

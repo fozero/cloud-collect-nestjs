@@ -13,7 +13,18 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly configService: ConfigService) {
     super({
       // 提供从请求中提取 JWT 的方法。
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      // jwtFromRequest，接受请求作为唯一参数并返回 JWT 作为字符串或 null 的函数
+      // 获取token的2种方式
+      // 1.从cookie中获取token
+      jwtFromRequest: (req) => {
+        let token = null;
+        if (req?.cookies) {
+          token = req.cookies['token'];
+        }
+        return token;
+      },
+      // 2.从header中获取token
+      // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // 选择默认的 false 设置，它将确保 JWT 没有过期的责任委托给 Passport 模块。这意味着，如果我们的路由提供了一个过期的 JWT ，请求将被拒绝，并发送 401 Unauthorized 的响应。
       ignoreExpiration: false,
       // 密钥，不要暴露出去
